@@ -1,6 +1,6 @@
 {
   "name": "oas-to-ts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Convert an OpenAPI specifcation document to typescript types",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
