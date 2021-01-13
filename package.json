@@ -4,11 +4,22 @@
   "version": "0.1.0",
   "description": "Convert an OpenAPI specifcation document to typescript types",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "bin": {
     "oas-to-ts": "./lib/cli.js"
   },
   "author": "Divid AB <info@divid.se>",
-  "license": "UNLICENCED",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dividab/oas-to-ts.git"
+  },
+  "keywords": [
+    "open api specification",
+    "oas",
+    "typescript",
+    "swagger"
+  ],
   "devDependencies": {
     "@types/node": "^14.6.4",
     "@types/prettier": "^2.0.1",
@@ -21,6 +32,11 @@
     "openapi-types": "^1.3.5"
   },
   "scripts": {
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "clean": "rm -rf lib",
+    "lint": "eslint './{src,tests}/**/*.ts' --ext .ts -f visualstudio ",
+    "verify": "yarn lint && yarn test-coverage && yarn dist",
+    "preversion": "yarn verify",
+    "postversion": "git push --tags && yarn publish --new-version $npm_package_version && git push --follow-tags && echo \"Successfully released version $npm_package_version!\""
   }
 }

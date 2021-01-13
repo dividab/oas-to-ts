@@ -1,6 +1,15 @@
 # oas-to-ts
 
-Converts an OpenAPI document (yaml or json) to typescript type.
+[![npm version][version-image]][version-url]
+[![travis build][travis-image]][travis-url]
+[![Coverage Status][codecov-image]][codecov-url]
+[![code style: prettier][prettier-image]][prettier-url]
+[![types][types-image]][types-url]
+[![MIT license][license-image]][license-url]
+
+Convert an OpenAPI specifcation document to typescript types
+
+## Introduction
 
 Supports a design-first workflow that only generates types (no runnable code):
 
@@ -244,18 +253,26 @@ export type PathOperationFns<Context> = {
     readonly get: (
       ctx: Context,
       parameters: Spec["paths"]["/units"]["get"]["parameters"]
-    ) => Promise<HandlerResponseFromSpec<Spec["paths"]["/units"]["get"]["responses"]>>;
+    ) => Promise<
+      HandlerResponseFromSpec<Spec["paths"]["/units"]["get"]["responses"]>
+    >;
     readonly post: (
       ctx: Context,
       parameters: Spec["paths"]["/units"]["post"]["parameters"],
       requestBody: Spec["paths"]["/units"]["post"]["requestBody"]
-    ) => Promise<HandlerResponseFromSpec<Spec["paths"]["/units"]["post"]["responses"]>>;
+    ) => Promise<
+      HandlerResponseFromSpec<Spec["paths"]["/units"]["post"]["responses"]>
+    >;
   };
   readonly "/units/{unitId}": {
     readonly get: (
       ctx: Context,
       parameters: Spec["paths"]["/units/{unitId}"]["get"]["parameters"]
-    ) => Promise<HandlerResponseFromSpec<Spec["paths"]["/units/{unitId}"]["get"]["responses"]>>;
+    ) => Promise<
+      HandlerResponseFromSpec<
+        Spec["paths"]["/units/{unitId}"]["get"]["responses"]
+      >
+    >;
   };
 };
 ```
@@ -272,3 +289,24 @@ There is a built-in fastify adapter that can be used with the generated types.
 
 https://apisyouwonthate.com/blog/theres-no-reason-to-write-openapi-by-hand/
 https://apisyouwonthate.com/blog/api-design-first-vs-code-first
+
+## How to publish
+
+```
+yarn version --patch
+yarn version --minor
+yarn version --major
+```
+
+[version-image]: https://img.shields.io/npm/v/oas-to-ts.svg?style=flat
+[version-url]: https://www.npmjs.com/package/oas-to-ts
+[travis-image]: https://travis-ci.com/dividab/oas-to-ts.svg?branch=master&style=flat
+[travis-url]: https://travis-ci.com/dividab/oas-to-ts
+[codecov-image]: https://codecov.io/gh/dividab/oas-to-ts/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/dividab/oas-to-ts
+[prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat
+[prettier-url]: https://github.com/prettier/prettier
+[types-image]: https://img.shields.io/npm/types/scrub-js.svg
+[types-url]: https://www.typescriptlang.org/
+[license-image]: https://img.shields.io/github/license/dividab/oas-to-ts.svg?style=flat
+[license-url]: https://opensource.org/licenses/MIT
