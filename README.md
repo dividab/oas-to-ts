@@ -1,7 +1,7 @@
 # oas-to-ts
 
 [![npm version][version-image]][version-url]
-[![travis build][travis-image]][travis-url]
+[![build][build-image]][build-url]
 [![Coverage Status][codecov-image]][codecov-url]
 [![code style: prettier][prettier-image]][prettier-url]
 [![types][types-image]][types-url]
@@ -253,26 +253,18 @@ export type PathOperationFns<Context> = {
     readonly get: (
       ctx: Context,
       parameters: Spec["paths"]["/units"]["get"]["parameters"]
-    ) => Promise<
-      HandlerResponseFromSpec<Spec["paths"]["/units"]["get"]["responses"]>
-    >;
+    ) => Promise<HandlerResponseFromSpec<Spec["paths"]["/units"]["get"]["responses"]>>;
     readonly post: (
       ctx: Context,
       parameters: Spec["paths"]["/units"]["post"]["parameters"],
       requestBody: Spec["paths"]["/units"]["post"]["requestBody"]
-    ) => Promise<
-      HandlerResponseFromSpec<Spec["paths"]["/units"]["post"]["responses"]>
-    >;
+    ) => Promise<HandlerResponseFromSpec<Spec["paths"]["/units"]["post"]["responses"]>>;
   };
   readonly "/units/{unitId}": {
     readonly get: (
       ctx: Context,
       parameters: Spec["paths"]["/units/{unitId}"]["get"]["parameters"]
-    ) => Promise<
-      HandlerResponseFromSpec<
-        Spec["paths"]["/units/{unitId}"]["get"]["responses"]
-      >
-    >;
+    ) => Promise<HandlerResponseFromSpec<Spec["paths"]["/units/{unitId}"]["get"]["responses"]>>;
   };
 };
 ```
@@ -300,8 +292,8 @@ yarn version --major
 
 [version-image]: https://img.shields.io/npm/v/oas-to-ts.svg?style=flat
 [version-url]: https://www.npmjs.com/package/oas-to-ts
-[travis-image]: https://travis-ci.com/dividab/oas-to-ts.svg?branch=master&style=flat
-[travis-url]: https://travis-ci.com/dividab/oas-to-ts
+[build-image]: https://github.com/dividab/oas-to-ts/workflows/Build/badge.svg
+[build-url]: https://github.com/dividab/oas-to-ts/actions?query=workflow%3ABuild+branch%3Amaster
 [codecov-image]: https://codecov.io/gh/dividab/oas-to-ts/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/dividab/oas-to-ts
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat
