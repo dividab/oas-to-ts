@@ -19,6 +19,6 @@ jobs:
       - name: npm install, build, and test
         run: |
           yarn install --frozen-lockfile
-          yarn test
+          yarn build
         env:
           CI: true
