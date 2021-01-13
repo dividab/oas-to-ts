@@ -1,6 +1,5 @@
 {
-  "private": true,
-  "name": "@uc/oas-to-ts",
+  "name": "oas-to-ts",
   "version": "0.1.0",
   "description": "Convert an OpenAPI specifcation document to typescript types",
   "main": "lib/index.js",
