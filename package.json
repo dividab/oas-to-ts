@@ -38,8 +38,10 @@
     "eslint-plugin-functional": "^3.2.1",
     "eslint-plugin-import": "^2.22.1",
     "husky": "^4.3.7",
+    "jest": "^26.6.3",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
+    "ts-jest": "^26.4.4",
     "typescript": "^4.0.2"
   },
   "dependencies": {
@@ -52,7 +54,9 @@
     "build": "tsc -p .",
     "clean": "rm -rf lib",
     "lint": "eslint './src/**/*.ts{,x}' --ext .js,.ts,.tsx -f visualstudio",
-    "verify": "yarn lint",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "verify": "yarn lint && yarn test-coverage",
     "preversion": "yarn verify",
     "postversion": "git push --tags && yarn publish --new-version $npm_package_version && git push --follow-tags && echo \"Successfully released version $npm_package_version!\""
   },
