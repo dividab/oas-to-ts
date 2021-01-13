@@ -5,11 +5,11 @@ import { specOps, isRefObj } from "../shared";
 import { schemaObjectToTypescriptType, transformRef } from "./schema-to-ts";
 
 export async function documentToTypefile(inputFile: string, outputFile: string): Promise<void> {
-  const content = await documentToTypeString(inputFile);
+  const content = await inputFileToTypeString(inputFile);
   fs.writeFileSync(outputFile, content);
 }
 
-export async function documentToTypeString(inputFile: string): Promise<string> {
+export async function inputFileToTypeString(inputFile: string): Promise<string> {
   const spec = await loadOpenAPIDoc(inputFile);
   const content = documentToType(spec);
   return content;

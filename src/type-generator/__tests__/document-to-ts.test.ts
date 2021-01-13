@@ -10,7 +10,7 @@ test("documentToTypeString example", async () => {
   const inputFile = path.join(__dirname, "data/example-input.yaml");
   const outputFile = path.join(__dirname, "data/example-output.txt");
   const expctedOutput = fs.readFileSync(outputFile, "utf8");
-  const actualOutput = await DocmentToTs.documentToTypeString(inputFile);
+  const actualOutput = await DocmentToTs.inputFileToTypeString(inputFile);
   // fs.writeFileSync(outputFile, actualOutput);
   expect(actualOutput).toEqual(expctedOutput);
 });
