@@ -5,21 +5,30 @@ import { specOps, isRefObj } from "../shared";
 import { schemaObjectToTypescriptType, transformRef } from "./schema-to-ts";
 
 export async function documentToTypefile(inputFile: string, outputFile: string): Promise<void> {
-  const content = await documentToType(inputFile);
+  const content = await documentToTypeString(inputFile);
   fs.writeFileSync(outputFile, content);
 }
 
-/**
- * Generate a type that is bascially one-to-one with an OpenAPI specification document
- */
-async function documentToType(specDocument: string): Promise<string> {
-  const specUnbundled = (await SwaggerParser.parse(specDocument)) as OpenAPIV3.Document;
+export async function documentToTypeString(inputFile: string): Promise<string> {
+  const spec = await loadOpenAPIDoc(inputFile);
+  const content = documentToType(spec);
+  return content;
+}
+
+async function loadOpenAPIDoc(inputFile: string): Promise<OpenAPIV3.Document> {
+  const specUnbundled = (await SwaggerParser.parse(inputFile)) as OpenAPIV3.Document;
   if (!specUnbundled.openapi.startsWith("3")) {
     throw new Error(`Only OpenAPI 3 is supported, the provided spec document had ${specUnbundled.openapi}.`);
   }
   // Make all $ref internal (no external document)
   const spec = (await SwaggerParser.bundle(specUnbundled)) as OpenAPIV3.Document;
+  return spec;
+}
 
+/**
+ * Generate a type that is bascially one-to-one with an OpenAPI specification document
+ */
+export function documentToType(spec: OpenAPIV3.Document): string {
   let content = "";
 
   content = addLine(content, "/* eslint-disable */", 0);

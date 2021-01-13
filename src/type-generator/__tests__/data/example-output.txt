@@ -1,0 +1,88 @@
+/* eslint-disable */
+export interface Spec {
+  readonly paths: {
+    readonly "/units": {
+      readonly get: {
+        readonly parameters: {
+          readonly path: {
+          };
+          readonly query: {
+          };
+          readonly header: {
+          };
+          readonly cookie: {
+          };
+        }
+        readonly responses: {
+          readonly "200": {
+            readonly content: {
+              readonly "application/json": Spec["components"]["schemas"]["UnitList"]
+            }
+          }
+        }
+      }
+      readonly post: {
+        readonly parameters: {
+          readonly path: {
+          };
+          readonly query: {
+          };
+          readonly header: {
+          };
+          readonly cookie: {
+          };
+        }
+          readonly "requestBody": Spec["components"]["requestBodies"]["UnitBody"]
+        readonly responses: {
+        }
+      }
+    }
+    readonly "/units/{unitId}": {
+      readonly get: {
+        readonly parameters: {
+          readonly path: {
+            readonly unitId: number
+          };
+          readonly query: {
+            readonly unitId: number
+          };
+          readonly header: {
+          };
+          readonly cookie: {
+          };
+        }
+        readonly responses: {
+          readonly "200": {
+            readonly content: {
+              readonly "application/json": Spec["components"]["schemas"]["Unit"]
+            }
+          }
+          readonly "404": {
+            readonly content: {
+              readonly "application/json": Spec["components"]["schemas"]["Error"]
+            }
+          }
+        }
+      }
+    }
+  }
+  readonly components: {
+    readonly schemas: {
+      readonly UnitList: (Spec["components"]["schemas"]["Unit"])[]
+      readonly Unit: ({ readonly "id"?: number;
+readonly "name"?: string;
+ })
+      readonly Error: ({ readonly "code"?: number;
+readonly "description"?: string;
+ })
+    }
+    readonly requestBodies: {
+      readonly UnitBody: {
+                readonly content: {
+          readonly "application/json": Spec["components"]["schemas"]["Unit"]
+        }
+      }
+    }
+  }
+}
+
