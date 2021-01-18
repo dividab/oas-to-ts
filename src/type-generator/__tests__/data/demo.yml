@@ -1,0 +1,17 @@
+openapi: "3.0.3"
+info:
+  version: 0.1.0
+  title: Demo
+paths:
+  /demo:
+    get:
+      parameters:
+        - in: query
+          name: demo
+          schema:
+            $ref: "#/components/schemas/demo"
+components:
+  schemas:
+    demo:
+      type: string
+      nullable: true

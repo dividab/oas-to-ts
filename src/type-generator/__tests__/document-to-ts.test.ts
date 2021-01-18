@@ -14,3 +14,12 @@ test("documentToTypeString example", async () => {
   // fs.writeFileSync(outputFile, actualOutput);
   expect(actualOutput).toEqual(expctedOutput);
 });
+
+test("Nullable example", async () => {
+  const inputFile = path.join(__dirname, "data/demo.yml");
+  const outputFile = path.join(__dirname, "data/demo-output.txt");
+  const expctedOutput = fs.readFileSync(outputFile, "utf8");
+  const actualOutput = await DocmentToTs.inputFileToTypeString(inputFile);
+  // fs.writeFileSync(outputFile, actualOutput);
+  expect(actualOutput).toEqual(expctedOutput);
+});

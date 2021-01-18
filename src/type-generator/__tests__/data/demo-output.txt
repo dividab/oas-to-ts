@@ -1,0 +1,26 @@
+/* eslint-disable */
+export interface Spec {
+  readonly paths: {
+    readonly "/demo": {
+      readonly get: {
+        readonly parameters: {
+          readonly path: {
+          };
+          readonly query: {
+            readonly demo: Spec["components"]["schemas"]["demo"]
+          };
+          readonly header: {
+          };
+          readonly cookie: {
+          };
+        }
+      }
+    }
+  }
+  readonly components: {
+    readonly schemas: {
+      readonly demo: string | null
+    }
+  }
+}
+
