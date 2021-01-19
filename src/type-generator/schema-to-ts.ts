@@ -50,6 +50,9 @@ export function schemaObjectToTypescriptType(node: OpenAPIV3.SchemaObject | Open
       if (node.pattern) {
         return `"${node.pattern}"`;
       }
+      if (node.nullable) {
+        return "string | null";
+      }
       return "string";
     case "number":
     case "boolean": {
