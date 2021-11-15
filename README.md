@@ -273,6 +273,90 @@ export type PathOperationFns<Context> = {
 
 There is a built-in fastify adapter that can be used with the generated types.
 
+Here is an example of how it can be used with fastify:
+
+```ts
+import path from "path";
+import Fastify, { FastifyRequest } from "fastify";
+import { createFastifyPlugin, HandlerFnsFromRootSpec } from "oas-to-ts";
+import { Spec } from "./generated-schema";
+
+// The context can be anything you need
+type Context = {
+  readonly userId: string;
+};
+
+// Create mapped type for handler functions
+type HandlerFns = HandlerFnsFromRootSpec<Spec, Context>;
+
+// Implement the handler functions
+export const handlers: HandlerFns = {
+  "/units": {
+    get: async (ctx, parameters) => {
+      console.log(ctx, parameters);
+      const theUnits = ctx.db.getUnits();
+      return {
+        httpCode: "200",
+        contentType: "application/json",
+        content: theUnits,
+      };
+    },
+    post: async (_ctx, _parameters) => {
+      // console.log(ctx, parameters);
+      return {
+        httpCode: "201",
+      };
+    },
+  },
+  "/units/{unitId}": {
+    get: async (ctx, parameters) => {
+      console.log(ctx, parameters);
+      const theUnits = ctx.db.getUnits();
+      const foundUnit = theUnits.find((u) => u.id === parameters.path.unitId);
+      if (foundUnit) {
+        return {
+          httpCode: "200",
+          contentType: "application/json",
+          content: foundUnit,
+        };
+      } else {
+        return {
+          httpCode: "404",
+          contentType: "application/json",
+          content: {},
+        };
+      }
+    },
+  },
+};
+
+// Create fastify plugin
+const spec = path.join(__dirname, "../src/schema.yml");
+const plugin = createFastifyPlugin({
+  spec,
+  handlers,
+  createContext: async (request: FastifyRequest) => {
+    // Logic to create the context from the request goes here...
+    return { userId: "theuser" };
+  },
+});
+
+// Create server and register plugin
+const fastify = Fastify();
+fastify.register(plugin);
+
+// Run the server!
+const start = async () => {
+  try {
+    await fastify.listen(3000);
+  } catch (err) {
+    fastify.log.error(err);
+    process.exit(1);
+  }
+};
+start();
+```
+
 ## Future work
 
 - Perhaps we should generate handler funciton types explicitly instead of mapping them. Mapping is technically better since the generated type can be simple and support many types of mapping. But generating explicit types makes it easier to read/visualize the types.
