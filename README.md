@@ -9,6 +9,11 @@
 
 Convert an OpenAPI specifcation document to typescript types
 
+:warning: NOTE: **This package has been discontinued. No further work will happen here**. 
+
+:rocket: Please use the [openapi-typescript](https://www.npmjs.com/package/openapi-typescript) package instead.
+
+
 ## Introduction
 
 Supports a design-first workflow that only generates types (no runnable code):
